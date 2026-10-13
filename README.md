@@ -1,8 +1,81 @@
 # Spring AI Image
 
-This repository contains source code examples used to support my on-line courses about the Spring Framework.
+A small Spring Boot application that uses Spring AI and OpenAI's image generation API to turn a
+text prompt into a PNG image. Send a JSON question to `/image`; the generated image is returned
+directly in the HTTP response.
 
-## All Spring Framework Guru Courses
+## Requirements
+
+- Java 21
+- An OpenAI API key with access to image generation
+
+## Configuration
+
+The application reads the API key from the `OPENAI_API_KEY` environment variable. Export it before
+starting the application:
+
+```bash
+export OPENAI_API_KEY=your-api-key
+```
+
+## Run the application
+
+Start the application with the Maven wrapper:
+
+```bash
+./mvnw spring-boot:run
+```
+
+The application listens on `http://localhost:8080`.
+
+## Generate an image
+
+With the application running, copy and run this command in a second terminal. The response is a
+PNG image, so redirect it to a file:
+
+```bash
+curl --location 'http://localhost:8080/image' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "question": "The Last JVM Engineer: a dramatic and humorous cinematic poster in which a lone Java developer stands on the roof of a server fortress during a thunderstorm, wielding a glowing golden JVM power core while an army of rogue AI-generated bugs rises from broken build pipelines. A sarcastic robot code reviewer in a hoodie leads the bugs, holding a red warning triangle like a battle standard. Behind the developer, an enormous neural network forms a protective halo around a coffee-fueled CI/CD pipeline. The developer deploys one final clean build, turning every bug into helpful unit tests. Epic scale, photorealistic detail, dramatic blue-versus-amber lighting, futuristic software engineering atmosphere, expressive characters, subtle developer humor, vertical theatrical poster composition, no readable text, no logos, no watermarks."
+  }' \
+  --output java-ai-poster.png
+```
+
+Open `java-ai-poster.png` after the request completes.
+
+### Sample result
+
+![The Last JVM Engineer - Java and AI image generation sample](java-ai-poster.png)
+
+## API
+
+### `POST /image`
+
+Request body:
+
+```json
+{
+  "question": "A detailed description of the image to generate"
+}
+```
+
+The endpoint returns the generated image as `image/png`. The current implementation uses the
+`gpt-image-1` model and requests a 1024x1024 image. The image data is returned as Base64 by
+OpenAI and decoded by the application before being sent to the client.
+
+## Test the project
+
+```bash
+./mvnw test
+```
+
+## Course resources
+
+This repository contains source code examples used to support online courses about the Spring
+Framework.
+
+### All Spring Framework Guru Courses
 ### Spring Framework 6
 * [Spring Framework 6 - Beginner to Guru](https://www.udemy.com/course/spring-framework-6-beginner-to-guru/?referralCode=2BD0B7B7B6B511D699A9)
 * [Hibernate and Spring Data JPA: Beginner to Guru](https://www.udemy.com/course/hibernate-and-spring-data-jpa-beginner-to-guru/?referralCode=251C4C865302C7B1BB8F)
