@@ -42,11 +42,11 @@ curl --location 'http://localhost:8080/image' \
   --output java-ai-poster.png
 ```
 
-Open `java-ai-poster.png` after the request completes.
+Open `output/java-ai-poster.png` after the request completes.
 
 ### Sample result
 
-![The Last JVM Engineer - Java and AI image generation sample](java-ai-poster.png)
+![The Last JVM Engineer - Java and AI image generation sample](output/java-ai-poster.png)
 
 ### Another prompt example
 
@@ -63,7 +63,7 @@ curl --location 'http://localhost:8080/image' \
 
 #### Sample result
 
-![The Nightly Build After the Outbreak - Java and AI zombie apocalypse image](java-zombie-apocalypse.png)
+![The Nightly Build After the Outbreak - Java and AI zombie apocalypse image](output/java-zombie-apocalypse.png)
 
 ### Photorealistic beach example
 
@@ -80,7 +80,7 @@ curl --location 'http://localhost:8080/image' \
 
 #### Sample result
 
-![Photorealistic Rio de Janeiro beach fashion editorial](rio-beach-ai.png)
+![Photorealistic Rio de Janeiro beach fashion editorial](output/rio-beach-ai.png)
 
 ## API
 
