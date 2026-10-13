@@ -65,6 +65,23 @@ curl --location 'http://localhost:8080/image' \
 
 ![The Nightly Build After the Outbreak - Java and AI zombie apocalypse image](java-zombie-apocalypse.png)
 
+### Photorealistic beach example
+
+This example is designed for a vivid, photorealistic Copacabana beach-volleyball scene:
+
+```bash
+curl --location 'http://localhost:8080/image' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "question": "A breathtaking photorealistic sports-editorial photograph on Copacabana Beach in Rio de Janeiro at golden hour, featuring three confident adult women in tasteful athletic beachwear playing an energetic beach-volleyball rally on a professional sand court, one athlete leaping for a spectacular overhead hit while her teammates move into position and laugh naturally. Make Copacabana unmistakable: the sweeping crescent shoreline, busy promenade, black-and-white Portuguese wave mosaic pavement, rows of palm trees, colorful beach kiosks, beachgoers, and the Christ the Redeemer statue clearly visible on the mountain ridge in the background, with Sugarloaf Mountain farther across the bay. Warm low sunlight, ocean spray and sand particles frozen in the air, authentic skin texture, detailed hair and fabric, realistic athletic motion, natural anatomy, cinematic depth, vibrant but true-to-life colors, high-end travel and sports magazine composition, 85mm lens, no readable text, no logos, no watermark."
+  }' \
+  --output rio-beach-ai.png
+```
+
+#### Sample result
+
+![Photorealistic Rio de Janeiro beach fashion editorial](rio-beach-ai.png)
+
 ## API
 
 ### `POST /image`
@@ -78,8 +95,9 @@ Request body:
 ```
 
 The endpoint returns the generated image as `image/png`. The current implementation uses the
-`gpt-image-1` model and requests a 1024x1024 image. The image data is returned as Base64 by
-OpenAI and decoded by the application before being sent to the client.
+`gpt-image-1` model, requests a 1024x1024 image at high quality, and describes the desired
+photorealistic appearance in the prompt. GPT Image models return image data as Base64 by default;
+the application decodes it before sending the PNG to the client.
 
 ## Test the project
 
