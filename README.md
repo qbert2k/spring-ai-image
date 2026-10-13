@@ -1,13 +1,13 @@
 # Spring AI Image
 
-A small Spring Boot application that uses Spring AI and OpenAI's image generation API to turn a
-text prompt into a PNG image. Send a JSON question to `/image`; the generated image is returned
-directly in the HTTP response.
+A small Spring Boot application that uses Spring AI and OpenAI models for two image workflows:
+generate a PNG from a text prompt with `/image`, or upload an image to `/vision` and receive a
+detailed description of its contents.
 
 ## Requirements
 
 - Java 21
-- An OpenAI API key with access to image generation
+- An OpenAI API key with access to image generation and vision-capable chat models
 
 ## Configuration
 
@@ -98,6 +98,31 @@ The endpoint returns the generated image as `image/png`. The current implementat
 `gpt-image-1` model, requests a 1024x1024 image at high quality, and describes the desired
 photorealistic appearance in the prompt. GPT Image models return image data as Base64 by default;
 the application decodes it before sending the PNG to the client.
+
+### `POST /vision`
+
+Upload a JPEG image as the `file` multipart form field to receive an AI-generated description.
+The vision workflow uses the `gpt-4o-mini` model.
+
+```bash
+curl --location 'http://localhost:8080/vision' \
+  --header 'Content-Type: multipart/form-data' \
+  --form 'file=@"/path/to/image.jpg"'
+```
+
+In Postman, replace `/path/to/image.jpg` with the image file selected in the form-data editor.
+The `postman-cloud:///...` file reference is specific to Postman and is not portable to a
+terminal outside that application.
+
+Example response:
+
+```text
+AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=The image is a vibrant,
+intricate illustration that features a multitude of elements arranged in a circular pattern.
+The color scheme predominantly includes red and blue against a light background, creating a
+striking contrast. In the center, there appears to be a stylized number "250", surrounded by
+doodles representing technology, music, transportation, people, and creativity.]
+```
 
 ## Test the project
 
