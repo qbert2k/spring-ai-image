@@ -48,6 +48,23 @@ Open `java-ai-poster.png` after the request completes.
 
 ![The Last JVM Engineer - Java and AI image generation sample](java-ai-poster.png)
 
+### Another prompt example
+
+This prompt creates a tense, darkly humorous Java-and-AI survival scene:
+
+```bash
+curl --location 'http://localhost:8080/image' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "question": "The Nightly Build After the Outbreak: a cinematic survival-horror scene in a deserted city reclaimed by nature, where a determined Java developer guards the last functioning data center against a massive horde of AI-generated code zombies. The undead wear torn office clothes and carry broken keyboards, empty coffee cups, and obsolete bug reports. A small service robot projects a glowing blue Java stack trace onto the fog as a warning signal, while an improvised team of developers fortifies the server room with Ethernet cables and deploys automated tests as defensive drones. Moody overcast sky, rain-slick streets, ominous atmosphere, dramatic flashlight beams, realistic practical details, tense survival storytelling, dark developer humor, no readable text, no logos, no watermarks."
+  }' \
+  --output java-zombie-apocalypse.png
+```
+
+#### Sample result
+
+![The Nightly Build After the Outbreak - Java and AI zombie apocalypse image](java-zombie-apocalypse.png)
+
 ## API
 
 ### `POST /image`
